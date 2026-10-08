@@ -249,6 +249,11 @@ data: [DONE]
 
 可以看到，工具调用的 `arguments` 被拆成了好几段（`{"expre` + `ssion": "1+1"}`），必须按 `index` 拼起来才是合法的 JSON。
 
+![图 4-1：流式工具调用的参数分片到达，Provider 按 index 拼接，流结束时才得到完整的 ToolCall。](./images/fig-04-toolcall-stitch.svg)
+
+*图 4-1：流式工具调用的参数分片到达，Provider 按 index 拼接，流结束时才得到完整的 ToolCall。*
+
+
 “OpenAI 兼容”是一个非常划算的选择：OpenAI、DeepSeek、通义千问、Moonshot、智谱、Ollama、vLLM、LM Studio……都提供这套接口，**一个 Provider 能接几十种模型**。
 
 ### 4.3.4 Mock Provider：让全书离线可跑

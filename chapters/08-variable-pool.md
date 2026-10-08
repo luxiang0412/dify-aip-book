@@ -11,23 +11,9 @@
 
 **方案 B：共享黑板**（Dify 的做法）。每个节点运行完，把输出写进一块**共享的存储**；任何节点都可以按“节点 ID + 变量名”去读。**边只表示执行顺序，不负责搬运数据。**
 
-```mermaid
-flowchart LR
-  subgraph 执行顺序
-    S[开始] --> H[HTTP] --> L[LLM] --> E[结束]
-  end
-  subgraph VP["变量池（共享黑板）"]
-    v1["start.query = '你好'"]
-    v2["http.body = '{...}'"]
-    v3["llm.text = '...'"]
-    v4["sys.user_id = 'u1'"]
-  end
-  S -. 写 .-> v1
-  H -. 写 .-> v2
-  L -. "读 start.query, http.body" .-> VP
-  L -. 写 .-> v3
-  E -. "读 llm.text" .-> v3
-```
+![图 8-1：沿边传递 vs 共享变量池。变量池里边只表示执行顺序，节点按 selector 直接读上游输出。](./images/fig-08-blackboard.svg)
+
+*图 8-1：沿边传递 vs 共享变量池。变量池里边只表示执行顺序，节点按 selector 直接读上游输出。*
 
 方案 B 的好处：
 

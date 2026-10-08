@@ -134,6 +134,11 @@ updateNodeData: (id, patch) =>
 
 ### 15.3.3 防抖自动保存 + 乐观锁
 
+![图 15-1：每次保存都带上最后一次拿到的 hash；冲突时返回 409（同图 7-1）。](./images/fig-15-optimistic-lock.svg)
+
+*图 15-1：每次保存都带上最后一次拿到的 hash；冲突时返回 409（同图 7-1）。*
+
+
 ```ts
 // frontend/src/workflow/hooks/useSyncDraft.ts
 export function useSyncDraft(appId: string) {

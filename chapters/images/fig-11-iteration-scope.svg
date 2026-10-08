@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 360" width="940" height="360" role="img" aria-label="迭代的每一轮使用一个子变量池：读取先查自己再回落到外层池，写入只写自己。并行的几轮各自写 sq.y 互不覆盖，最后按序号收集成输出数组。" font-family="-apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif">
+<title>迭代的每一轮使用一个子变量池：读取先查自己再回落到外层池，写入只写自己。并行的几轮各自写 sq.y 互不覆盖，最后按序号收集成输出数组。</title>
+<defs><marker id="a-neutral" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker><marker id="a-neutral-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker><marker id="a-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="a-accent-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="a-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="a-ok-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="a-warn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d97706"/></marker><marker id="a-warn-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d97706"/></marker><marker id="a-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="a-bad-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="a-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="a-purple-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="a-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/></marker><marker id="a-teal-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/></marker><marker id="a-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/></marker><marker id="a-muted-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/></marker></defs>
+<rect x="0.5" y="0.5" width="939" height="359" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+<text x="24.0" y="34.0" font-size="15" text-anchor="start" fill="#1f2937" font-weight="700">迭代的子作用域：读回落、写隔离</text>
+<text x="24.0" y="54.0" font-size="12" text-anchor="start" fill="#6b7280">items = [3, 1, 2]，并行 3 轮，循环体：sq = item × item</text>
+<rect x="280.0" y="75.0" width="380.0" height="60.0" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="470.0" y="101.8" font-size="13" text-anchor="middle" fill="#1e3a8a" font-weight="600">外层变量池</text>
+<text x="470.0" y="118.7" font-size="11" text-anchor="middle" fill="#6b7280">start.*  ·  make.items = [3, 1, 2]  ·  sys.*</text>
+<rect x="60.0" y="200.0" width="240.0" height="74.0" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="180.0" y="227.1" font-size="12.5" text-anchor="middle" fill="#1f2937" font-weight="600">第 0 轮子池</text>
+<text x="180.0" y="243.3" font-size="10.5" text-anchor="middle" fill="#6b7280">loop.item = 3 · loop.index = 0</text>
+<text x="180.0" y="257.0" font-size="10.5" text-anchor="middle" fill="#6b7280">sq.y = 9</text>
+<path d="M180.0,200.0 L281.5,135.0" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a-accent)"/>
+<rect x="211.0" y="152.0" width="39.5" height="14.5" rx="3" fill="#ffffff" opacity="0.92"/>
+<text x="230.8" y="163.0" font-size="10.5" text-anchor="middle" fill="#2563eb">读回落</text>
+<text x="180.0" y="292.0" font-size="11" text-anchor="middle" fill="#16a34a">写入只留在本轮</text>
+<rect x="350.0" y="200.0" width="240.0" height="74.0" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="470.0" y="227.1" font-size="12.5" text-anchor="middle" fill="#1f2937" font-weight="600">第 1 轮子池</text>
+<text x="470.0" y="243.3" font-size="10.5" text-anchor="middle" fill="#6b7280">loop.item = 1 · loop.index = 1</text>
+<text x="470.0" y="257.0" font-size="10.5" text-anchor="middle" fill="#6b7280">sq.y = 1</text>
+<path d="M470.0,200.0 L470.0,135.0" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a-accent)"/>
+<rect x="450.2" y="152.0" width="39.5" height="14.5" rx="3" fill="#ffffff" opacity="0.92"/>
+<text x="470.0" y="163.0" font-size="10.5" text-anchor="middle" fill="#2563eb">读回落</text>
+<text x="470.0" y="292.0" font-size="11" text-anchor="middle" fill="#16a34a">写入只留在本轮</text>
+<rect x="640.0" y="200.0" width="240.0" height="74.0" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="760.0" y="227.1" font-size="12.5" text-anchor="middle" fill="#1f2937" font-weight="600">第 2 轮子池</text>
+<text x="760.0" y="243.3" font-size="10.5" text-anchor="middle" fill="#6b7280">loop.item = 2 · loop.index = 2</text>
+<text x="760.0" y="257.0" font-size="10.5" text-anchor="middle" fill="#6b7280">sq.y = 4</text>
+<path d="M760.0,200.0 L658.5,135.0" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a-accent)"/>
+<rect x="689.5" y="152.0" width="39.5" height="14.5" rx="3" fill="#ffffff" opacity="0.92"/>
+<text x="709.2" y="163.0" font-size="10.5" text-anchor="middle" fill="#2563eb">读回落</text>
+<text x="760.0" y="292.0" font-size="11" text-anchor="middle" fill="#16a34a">写入只留在本轮</text>
+<rect x="300.0" y="310.0" width="340.0" height="34.0" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+<text x="470.0" y="330.6" font-size="12" text-anchor="middle" fill="#14532d" font-weight="600">output = [9, 1, 4]（按 index 收集，与完成顺序无关）</text>
+</svg>

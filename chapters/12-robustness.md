@@ -32,6 +32,11 @@ class ErrorStrategy(StrEnum):
 
 ## 12.2 Dify 是怎么做的：ErrorHandler
 
+![图 12-1：节点失败后先看能否重试，重试用完再按错误策略处理：终止 / 默认值继续 / 走异常分支。](./images/fig-12-error-flow.svg)
+
+*图 12-1：节点失败后先看能否重试，重试用完再按错误策略处理：终止 / 默认值继续 / 走异常分支。*
+
+
 节点失败时，Worker 产出 `NodeRunFailedEvent`。EventHandler 收到后交给 `ErrorHandler.handle_node_failure`（`graphon/graph_engine/error_handler.py:51`）：
 
 ```python

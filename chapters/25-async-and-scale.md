@@ -20,25 +20,9 @@ v0.2 到 v0.5 的架构是这样的：
 
 解决方法是把“**接收请求、推送事件**”和“**执行任务**”拆到不同的进程甚至不同的机器上，中间用消息系统连接：
 
-```mermaid
-flowchart LR
-  subgraph API["API 实例 ×N（无状态）"]
-    G[prepare → job]
-    S["subscribe(task_id) → SSE"]
-    X["stop(task_id)"]
-  end
-  subgraph Redis
-    Q[[Celery 队列]]
-    ST[("Stream: events:{task_id}")]
-    CM[("List: commands:{task_id}")]
-  end
-  subgraph W["Worker ×M（Celery）"]
-    E[execute(job): 引擎]
-  end
-  G -- job --> Q --> E
-  E -- XADD 事件 --> ST -- XREAD BLOCK --> S
-  X -- RPUSH --> CM -- "引擎轮询 LRANGE+DEL" --> E
-```
+![图 25-1：job 走 Celery 队列、事件走 Redis Stream、命令走 Redis List；任何 API 实例都能服务任何任务。](./images/fig-25-scale-out.svg)
+
+*图 25-1：job 走 Celery 队列、事件走 Redis Stream、命令走 Redis List；任何 API 实例都能服务任何任务。*
 
 ## 25.2 Dify 是怎么做的
 

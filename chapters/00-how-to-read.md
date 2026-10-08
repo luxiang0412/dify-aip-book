@@ -15,24 +15,9 @@
 
 它的整体结构刻意和 Dify 保持一致，只是每一层都降了一档复杂度：
 
-```mermaid
-flowchart LR
-  subgraph Browser["浏览器（React + React Flow + Zustand）"]
-    Editor[画布编辑器] --- RunPanel[运行/追踪面板] --- Chat[聊天/分享页]
-  end
-  subgraph API["API 进程（FastAPI）"]
-    Console[控制台 API] --- Service[Service API /v1] --- Web[Web/Webhook/MCP]
-    Gen[App Generator]
-  end
-  subgraph Worker["Worker（线程 或 Celery）"]
-    Engine[Graph Engine] --> Nodes[节点: LLM/Agent/Tool/RAG/Code/HTTP...]
-  end
-  Browser -- "HTTP + SSE" --> API
-  Gen -- "job" --> Worker
-  Worker -- "事件（队列 / Redis Stream）" --> Gen
-  Nodes --> LLM[(模型: mock / OpenAI 兼容)]
-  Nodes --> DB[(SQLite / Postgres)]
-```
+![图 0-1：mini-dify v1.0 总体架构。API 只收请求、推事件；运行作为 job 交给执行端；事件经队列或 Redis Stream 回来。](./images/fig-00-overview.svg)
+
+*图 0-1：mini-dify v1.0 总体架构。API 只收请求、推事件；运行作为 job 交给执行端；事件经队列或 Redis Stream 回来。*
 
 ## 0.2 这本书的结构
 

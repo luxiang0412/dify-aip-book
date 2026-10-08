@@ -100,3 +100,12 @@ npm install
 npm run dev               # 本地预览 http://localhost:5173/dify-aip-book/
 ./scripts/deploy.sh       # 构建并发布到 gh-pages 分支（GitHub Pages）
 ```
+
+## 插图
+
+书中的 20 张 SVG 插图由脚本生成，统一风格、方便修改：
+
+```bash
+python3 scripts/figures/build.py           # 重新生成全部插图到 chapters/images/fig-*.svg
+python3 scripts/figures/build.py fig-09    # 只生成某一张
+```

@@ -50,6 +50,10 @@ MCP 的消息格式是 JSON-RPC 2.0：
 ← {content: [{type: "text", text: "..."}], structuredContent?: {...}, isError: false}
 ```
 
+![图 20-1：MCP 客户端只需要四条消息：initialize、initialized 通知、tools/list、tools/call。](./images/fig-20-mcp.svg)
+
+*图 20-1：MCP 客户端只需要四条消息：initialize、initialized 通知、tools/list、tools/call。*
+
 ## 20.3 传输方式
 
 同样的 JSON-RPC 消息，可以用不同的方式传输：

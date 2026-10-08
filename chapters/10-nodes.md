@@ -117,6 +117,11 @@ return NodeRunResult(
 
 还有更难的情况：Answer 节点位于某个 IF 分支上，在分支还没决定之前，**一个字都不能输出**，否则用户会看到不该看到的内容。
 
+![图 10-1：回复流按模板顺序输出：文本立即输出，当前片段的 LLM token 逐个转发，先完成的后续变量要等前面输出完。](./images/fig-10-response-stream.svg)
+
+*图 10-1：回复流按模板顺序输出：文本立即输出，当前片段的 LLM token 逐个转发，先完成的后续变量要等前面输出完。*
+
+
 这就是 graphon 的 `ResponseStreamFilter`（`graphon/graph_engine/filters/response_stream.py`，800 多行）要解决的问题。Dify 在 `WorkflowEntry.run()` 里把它作为事件过滤器套在引擎外面（第 3 章 3.5）。它的核心概念：
 
 - 把每个回复节点的模板拆成**片段**：文本片段和变量片段；

@@ -139,6 +139,11 @@ def _propagate_skip_to_node(self, node_id):
 
 ### 9.2.5 手工推演例 B（x = 99）
 
+![图 9-1：例 B 的四个时刻。IF 选 true 后先跳过 false 分支，传播到聚合时因还有 UNKNOWN 入边而停下；聚合在 {TAKEN, SKIPPED} 时就绪。](./images/fig-09-edge-states.svg)
+
+*图 9-1：例 B 的四个时刻。IF 选 true 后先跳过 false 分支，传播到聚合时因还有 UNKNOWN 入边而停下；聚合在 {TAKEN, SKIPPED} 时就绪。*
+
+
 | 步骤 | 事件 | 边状态变化 | 入队的节点 |
 |---|---|---|---|
 | 0 | 开始 | — | 开始 |

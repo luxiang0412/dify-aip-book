@@ -71,6 +71,10 @@ def safe_client(**kwargs) -> httpx.Client:
     return httpx.Client(follow_redirects=True, event_hooks={"request": [_on_request]}, **kwargs)
 ```
 
+![图 27-1：SSRF 防护要在每一跳都检查：302 跳到 169.254.169.254 时被事件钩子拦下。](./images/fig-27-ssrf.svg)
+
+*图 27-1：SSRF 防护要在每一跳都检查：302 跳到 169.254.169.254 时被事件钩子拦下。*
+
 几个要点：
 
 1. **检查的是解析后的 IP，而不是主机名**：`http://localhost`、`http://127.1`、`http://0x7f000001`、`http://my-evil-domain.com`（DNS 指向 127.0.0.1）在解析之后全都是回环地址；

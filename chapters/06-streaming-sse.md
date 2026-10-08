@@ -197,6 +197,10 @@ export async function ssePost(url, body, onEvent, signal?, headers = {}) {
 
 这十几行代码里藏着两个经典的坑：
 
+![图 6-1：一次 read() 可能停在 JSON 中间、甚至一个汉字的字节中间：流式解码 + 按空行切分 + 残片留在 buffer。](./images/fig-06-sse-buffer.svg)
+
+*图 6-1：一次 read() 可能停在 JSON 中间、甚至一个汉字的字节中间：流式解码 + 按空行切分 + 残片留在 buffer。*
+
 **坑 1：多字节字符被切断。** 网络分包不关心字符边界，一个中文字符的 3 个 UTF-8 字节可能分散在两个包里。`decoder.decode(value, { stream: true })` 会把不完整的字节留到下一次再解码。如果不加 `stream: true`，你会时不时看到 `�`。
 
 **坑 2：一个事件被切成两半。** 一次 `read()` 拿到的数据可能在 JSON 中间结束。所以要按 `\n\n` 切分，**最后一段（可能不完整）留在 buffer 里**，等下一次读取再拼接。
